@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SmartHouse.DomainModel.SmartDevices.Common;
 
 namespace SmartHouse.DomainModel.SmartDevices
@@ -6,6 +8,7 @@ namespace SmartHouse.DomainModel.SmartDevices
     public interface ISmartDevicesProvider
     {
         IEnumerable<IDeviceModel> GetDevices();
+        IDeviceModel GetDevice(Guid deviceId);
     }
 
     public class SmartDevicesFakeProvider : ISmartDevicesProvider
@@ -20,6 +23,11 @@ namespace SmartHouse.DomainModel.SmartDevices
         public static void AddDevice(IDeviceModel device)
         {
             _deviceModels.Add(device);
+        }
+
+        public IDeviceModel GetDevice(Guid deviceId)
+        {
+            return GetDevices().First(o => o.Id == deviceId);
         }
     }
 }

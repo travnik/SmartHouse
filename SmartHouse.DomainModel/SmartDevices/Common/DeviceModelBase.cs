@@ -6,6 +6,7 @@ namespace SmartHouse.DomainModel.SmartDevices.Common
 {
     public interface IDeviceModel
     {
+        Guid Id { get; }
         string Name { get; }
         IEnumerable<(string Id, string Name)> GetCommandsList();
         string ExecuteCommand(string commandId);
@@ -13,7 +14,7 @@ namespace SmartHouse.DomainModel.SmartDevices.Common
 
     public abstract class DeviceModelBase : IDeviceModel
     {
-        public readonly Guid Id = Guid.NewGuid();
+        public Guid Id { get; } = Guid.NewGuid();
         public abstract string Name { get; }
 
         protected abstract Dictionary<string, string> DescriptionCommands { get; }

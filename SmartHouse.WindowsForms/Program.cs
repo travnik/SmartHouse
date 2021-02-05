@@ -23,7 +23,8 @@ namespace SmartHouse.WindowsForms
             AddDevices();
 
             var controller = ConfigureServices();
-            controller.Run<SmartHousePresenter>();
+            controller.Run<ScenarioPresenter>();
+            //controller.Run<SmartHousePresenter>();
         }
 
         private static IApplicationController ConfigureServices()
@@ -32,6 +33,8 @@ namespace SmartHouse.WindowsForms
                 .RegisterService<ISmartDevicesProvider, SmartDevicesFakeProvider>()
                 .RegisterView<ISmartHouseView, Forms.SmartHouseForm>()
                 .RegisterService<ISmartHouseModel, SmartHouseModel>()
+                .RegisterView<IScenarioView, Forms.ScenarioForm>()
+                .RegisterService<IScenarioModel, ScenarioModel>()
                 .RegisterInstance(new ApplicationContext());
         }
 
