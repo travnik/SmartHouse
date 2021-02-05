@@ -16,5 +16,8 @@ namespace SmartHouse.Presentation.Common
 
         void Run<TPresenter, TArgumnent>(TArgumnent argumnent)
             where TPresenter : class, IPresenter<TArgumnent>;
+
+        TPresenter Create<TPresenter>() 
+            where TPresenter : class;
     }
 }

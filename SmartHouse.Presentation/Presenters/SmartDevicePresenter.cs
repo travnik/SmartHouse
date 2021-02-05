@@ -16,7 +16,7 @@ namespace SmartHouse.Presentation.Presenters
         {
             _view = smartDeviceView;
             _deviceModel = deviceModel;
-
+            _view.DisplayName = deviceModel.Name;
             AddCommandButtons(deviceModel);
         }
 

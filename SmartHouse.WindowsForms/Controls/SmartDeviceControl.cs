@@ -20,6 +20,12 @@ namespace SmartHouse.WindowsForms.Controls
             return button;
         }
 
+        public string DisplayName
+        {
+            get => Text;
+            set => Text = value;
+        }
+
         public void AddTextStatus(string text)
         {
             textBoxStatus.AppendText($"{text}{Environment.NewLine}");

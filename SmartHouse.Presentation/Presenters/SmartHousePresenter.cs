@@ -9,8 +9,6 @@ namespace SmartHouse.Presentation.Presenters
     {
         private readonly ISmartHouseModel _smartHouseModel;
 
-        private readonly List<ISmartDevicePresenter> _smartDevicePresenters = new List<ISmartDevicePresenter>();
-
         public SmartHousePresenter(IApplicationController controller, 
             ISmartHouseView view, 
             ISmartHouseModel smartHouseModel) 
@@ -25,9 +23,8 @@ namespace SmartHouse.Presentation.Presenters
             var devices = _smartHouseModel.GetDevices();
             foreach (var deviceModel in devices)
             {
-                var smartDeviceView = View.AddSmartDevice(deviceModel.Name);
-                var presenter = new SmartDevicePresenter(smartDeviceView, deviceModel);
-                _smartDevicePresenters.Add(presenter);
+                var smartDeviceView = View.AddSmartDevice();
+                var _ = new SmartDevicePresenter(smartDeviceView, deviceModel);
             }
         }
     }

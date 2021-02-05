@@ -37,7 +37,7 @@ namespace SmartHouse.WindowsForms.Forms
             this.tabControlDevices.Location = new System.Drawing.Point(1, 1);
             this.tabControlDevices.Name = "tabControlDevices";
             this.tabControlDevices.SelectedIndex = 0;
-            this.tabControlDevices.Size = new System.Drawing.Size(787, 300);
+            this.tabControlDevices.Size = new System.Drawing.Size(800, 314);
             this.tabControlDevices.TabIndex = 0;
             // 
             // SmartHouseForm

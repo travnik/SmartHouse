@@ -10,5 +10,10 @@ namespace SmartHouse.DomainModel.SmartDevices.Common
         public string DeviceName { get; set; }
         public string CommandId { get; set; }
         public string CommandName { get; set; }
+
+        public override string ToString()
+        {
+            return $"{DeviceName}: {CommandName}";
+        }
     }
 }

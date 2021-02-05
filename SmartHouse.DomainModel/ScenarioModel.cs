@@ -11,15 +11,11 @@ namespace SmartHouse.DomainModel
     {
         IEnumerable<IDeviceModel> GetDevices();
         IDeviceModel GetDevice(Guid deviceId);
-        BindingList<DescriptCommand> DescriptCommands { get; }
-        void AddCommand(DescriptCommand descriptCommand);
     }
 
     public class ScenarioModel : IScenarioModel
     {
         private readonly ISmartDevicesProvider _smartDevicesProvider;
-
-        public BindingList<DescriptCommand> DescriptCommands { get; } = new BindingList<DescriptCommand>();
 
         public ScenarioModel(ISmartDevicesProvider smartDevicesProvider)
         {
@@ -34,11 +30,6 @@ namespace SmartHouse.DomainModel
         public IDeviceModel GetDevice(Guid deviceId)
         {
             return _smartDevicesProvider.GetDevice(deviceId);
-        }
-
-        public void AddCommand(DescriptCommand descriptCommand)
-        {
-            DescriptCommands.Add(descriptCommand);
         }
     }
 }

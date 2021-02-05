@@ -45,7 +45,7 @@ namespace SmartHouse.WindowsForms.Controls
             // 
             // textBoxStatus
             // 
-            this.textBoxStatus.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.textBoxStatus.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxStatus.Dock = DockStyle.Top;
             this.textBoxStatus.Multiline = true;
             this.textBoxStatus.Name = "textBoxStatus";

@@ -14,5 +14,9 @@ namespace SmartHouse.Presentation.Views
         void BindScript(BindingList<DescriptCommand> scriptCommands);
         event Action<DeviceViewModel> DeviceSelected;
         event Action<DescriptCommand> AddCommand;
+        event Action<DescriptCommand> RemoveCommand;
+        event Action ExecuteScript;
+        event Action SaveScript;
+        void AddLog(string text);
     }
 }

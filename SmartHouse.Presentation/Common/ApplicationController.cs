@@ -52,5 +52,15 @@
             var presenter = _container.Resolve<TPresenter>();
             presenter.Run(argumnent);
         }
+
+        public TPresenter Create<TPresenter>() where TPresenter : class
+        {
+            if (!_container.IsRegistered<TPresenter>())
+            {
+                _container.Register<TPresenter>();
+            }
+
+            return _container.Resolve<TPresenter>();
+        }
     }
 }

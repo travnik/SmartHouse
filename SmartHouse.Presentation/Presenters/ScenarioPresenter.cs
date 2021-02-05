@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using SmartHouse.DomainModel;
@@ -13,6 +14,7 @@ namespace SmartHouse.Presentation.Presenters
     public class ScenarioPresenter : BasePresener<IScenarioView>
     {
         private readonly IScenarioModel _scenarioModel;
+        private readonly BindingList<DescriptCommand> _descriptCommands = new BindingList<DescriptCommand>();
 
         public ScenarioPresenter(IApplicationController controller, 
             IScenarioView view,
@@ -22,13 +24,13 @@ namespace SmartHouse.Presentation.Presenters
             _scenarioModel = scenarioModel;
             view.DeviceSelected += ViewOnDeviceSelected;
             view.AddCommand += AddCommand;
-            View.BindScript(_scenarioModel.DescriptCommands);
+            View.BindScript(_descriptCommands);
             AddDevicesToView();
         }
 
         private void AddCommand(DescriptCommand command)
         {
-            _scenarioModel.AddCommand(command);
+            _descriptCommands.Add(command);
         }
 
         private void ViewOnDeviceSelected(DeviceViewModel deviceModel)

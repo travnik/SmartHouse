@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using SmartHouse.DomainModel;
+using SmartHouse.DomainModel.Scripts;
 using SmartHouse.DomainModel.SmartDevices;
 using SmartHouse.Presentation.Common;
 using SmartHouse.Presentation.Presenters;
@@ -23,14 +24,15 @@ namespace SmartHouse.WindowsForms
             AddDevices();
 
             var controller = ConfigureServices();
-            controller.Run<ScenarioPresenter>();
-            //controller.Run<SmartHousePresenter>();
+            //controller.Run<ScenarioPresenter>();
+            controller.Run<SmartHousePresenter>();
         }
 
         private static IApplicationController ConfigureServices()
         {
             return new ApplicationController(new LightInjectAdapder())
                 .RegisterService<ISmartDevicesProvider, SmartDevicesFakeProvider>()
+                .RegisterService<IScriptRepository, ScriptRepository>()
                 .RegisterView<ISmartHouseView, Forms.SmartHouseForm>()
                 .RegisterService<ISmartHouseModel, SmartHouseModel>()
                 .RegisterView<IScenarioView, Forms.ScenarioForm>()

@@ -7,8 +7,6 @@ namespace SmartHouse.WindowsForms.Forms
 {
     public partial class SmartHouseForm : Form, ISmartHouseView
     {
-        public event Action Login;
-
         public SmartHouseForm()
         {
             InitializeComponent();
@@ -19,10 +17,9 @@ namespace SmartHouse.WindowsForms.Forms
             Application.Run(this);
         }
 
-        public ISmartDeviceView AddSmartDevice(string name)
+        public ISmartDeviceView AddSmartDevice()
         {
             var tabPage = new SmartDeviceControl();
-            tabPage.Text = name;
             tabControlDevices.TabPages.Add(tabPage);
             return tabPage;
         }

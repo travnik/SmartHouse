@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SmartHouse.DomainModel.SmartDevices.Common;
 using SmartHouse.Presentation.Views;
@@ -17,18 +12,36 @@ namespace SmartHouse.WindowsForms.Forms
     {
         public event Action<DeviceViewModel> DeviceSelected;
         public event Action<DescriptCommand> AddCommand;
+        public event Action<DescriptCommand> RemoveCommand;
+        public event Action ExecuteScript;
+        public event Action SaveScript;
 
         public ScenarioForm()
         {
             InitializeComponent();
             comboBoxDevices.SelectedValueChanged += ComboBoxDevicesOnSelectedValueChanged;
             buttonAddCommand.Click += ButtonAddCommandOnClick; 
+            buttonDeleteCommand.Click += ButtonDeleteCommandOnClick;
+            buttonRunScript.Click += (sender, args) => ExecuteScript?.Invoke();
+            buttonSaveScript.Click += (sender, args) => SaveScript?.Invoke();
+        }
+
+        private void ButtonDeleteCommandOnClick(object sender, EventArgs e)
+        {
+            var command = listBoxScript.SelectedItem as DescriptCommand;
+            if (command != null)
+            {
+                RemoveCommand?.Invoke(command);
+            }
         }
 
         private void ButtonAddCommandOnClick(object sender, EventArgs e)
         {
             var command = listBoxCommands.SelectedItem as DescriptCommand;
-            AddCommand?.Invoke(command);
+            if (command != null)
+            {
+                AddCommand?.Invoke(command);
+            }
         }
 
         private void ComboBoxDevicesOnSelectedValueChanged(object sender, EventArgs e)
@@ -61,6 +74,11 @@ namespace SmartHouse.WindowsForms.Forms
         public new void Show()
         {
             Application.Run(this);
+        }
+
+        public void AddLog(string text)
+        {
+            textBoxLog.AppendText($"{text}{Environment.NewLine}");
         }
     }
 }
