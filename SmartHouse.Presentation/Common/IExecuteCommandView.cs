@@ -6,7 +6,7 @@ namespace SmartHouse.Presentation.Common
 {
     public interface IExecuteCommandView
     {
-        string Name { get; set; }
+        string DisplayName { get; set; }
         event Action OnExecuteCommand;
     }
 }

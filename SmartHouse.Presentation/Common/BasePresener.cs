@@ -3,8 +3,8 @@
     public abstract class BasePresener<TView> : IPresenter
         where TView : IView
     {
-        protected TView View { get; private set; }
-        protected IApplicationController Controller { get; private set; }
+        protected readonly TView View;
+        protected readonly IApplicationController Controller;
 
         protected BasePresener(IApplicationController controller, TView view)
         {
@@ -21,8 +21,8 @@
     public abstract class BasePresener<TView, TArg> : IPresenter<TArg>
         where TView : IView
     {
-        protected TView View { get; private set; }
-        protected IApplicationController Controller { get; private set; }
+        protected readonly TView View;
+        protected readonly IApplicationController Controller;
 
         protected BasePresener(IApplicationController controller, TView view)
         {

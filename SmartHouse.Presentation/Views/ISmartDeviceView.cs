@@ -8,7 +8,7 @@ namespace SmartHouse.Presentation.Views
     public interface ISmartDeviceView
     {
         string DisplayName { get; set; }
-        IExecuteCommandView AddButton(string name);
+        IExecuteCommandView AddButton();
         void AddTextStatus(string text);
     }
 }

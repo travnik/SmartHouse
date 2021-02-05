@@ -12,9 +12,9 @@ namespace SmartHouse.WindowsForms.Controls
             InitializeComponent();
         }
 
-        public IExecuteCommandView AddButton(string name)
+        public IExecuteCommandView AddButton()
         {
-            var button = new ButtonCommand {Text = name};
+            var button = new ButtonCommand();
             flowLayoutPanelCommands.Controls.Add(button);
 
             return button;

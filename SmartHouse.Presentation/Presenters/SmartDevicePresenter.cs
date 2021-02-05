@@ -3,11 +3,7 @@ using SmartHouse.Presentation.Views;
 
 namespace SmartHouse.Presentation.Presenters
 {
-    public interface ISmartDevicePresenter
-    {
-    }
-
-    public class SmartDevicePresenter : ISmartDevicePresenter
+    public class SmartDevicePresenter
     {
         private readonly ISmartDeviceView _view;
         private readonly IDeviceModel _deviceModel;
@@ -25,9 +21,15 @@ namespace SmartHouse.Presentation.Presenters
             var commands = deviceModel.GetCommandsList();
             foreach (var command in commands)
             {
-                var view = _view.AddButton(command.Name);
-                view.OnExecuteCommand += () => ExecuteCommand(command.Id);
+                AddExecuteCommandView(command);
             }
+        }
+
+        private void AddExecuteCommandView((string Id, string Name) command)
+        {
+            var view = _view.AddButton();
+            view.DisplayName = command.Name;
+            view.OnExecuteCommand += () => ExecuteCommand(command.Id);
         }
 
         private void ExecuteCommand(string commandId)

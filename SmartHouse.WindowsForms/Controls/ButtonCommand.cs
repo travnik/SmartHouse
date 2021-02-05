@@ -9,6 +9,12 @@ namespace SmartHouse.WindowsForms.Controls
     {
         public event Action OnExecuteCommand;
 
+        public string DisplayName
+        {
+            get => Text;
+            set => Text = value;
+        }
+
         public ButtonCommand()
         {
             InitializeComponent();
