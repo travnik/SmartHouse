@@ -7,9 +7,12 @@ namespace SmartHouse.WindowsForms.Forms
 {
     public partial class SmartHouseForm : Form, ISmartHouseView
     {
+        public event Action OpenScripts;
+
         public SmartHouseForm()
         {
             InitializeComponent();
+            buttonScripts.Click += (sender, args) => OpenScripts?.Invoke();
         }
 
         public new void Show()

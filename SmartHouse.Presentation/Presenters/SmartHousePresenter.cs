@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using SmartHouse.DomainModel;
+﻿using SmartHouse.DomainModel;
 using SmartHouse.Presentation.Common;
 using SmartHouse.Presentation.Views;
 
@@ -15,7 +14,13 @@ namespace SmartHouse.Presentation.Presenters
             : base(controller, view)
         {
             _smartHouseModel = smartHouseModel;
+            View.OpenScripts += OpenScripts;
             AddDevicesToView();
+        }
+
+        private void OpenScripts()
+        {
+            Controller.Run<ScenarioPresenter>();
         }
 
         private void AddDevicesToView()

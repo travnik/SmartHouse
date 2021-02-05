@@ -73,7 +73,7 @@ namespace SmartHouse.WindowsForms.Forms
 
         public new void Show()
         {
-            Application.Run(this);
+            ShowDialog();
         }
 
         public void AddLog(string text)
