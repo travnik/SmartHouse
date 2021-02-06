@@ -7,7 +7,7 @@ using SmartHouse.Presentation.Views.ViewModels;
 
 namespace SmartHouse.Presentation.Views
 {
-    public interface IScenarioView : IView
+    public interface IEditScenarioView : IView
     {
         void BindDevicesList(IEnumerable<DeviceViewModel> devices);
         void BindCommandsList(IEnumerable<DescriptCommand> commands);
@@ -18,5 +18,6 @@ namespace SmartHouse.Presentation.Views
         event Action ExecuteScript;
         event Action SaveScript;
         void AddLog(string text);
+        string ScriptName { get; set; }
     }
 }

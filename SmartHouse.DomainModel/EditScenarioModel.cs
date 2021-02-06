@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 using SmartHouse.DomainModel.SmartDevices;
 using SmartHouse.DomainModel.SmartDevices.Common;
 
 namespace SmartHouse.DomainModel
 {
-    public interface IScenarioModel
+    public interface IEditScenarioModel
     {
         IEnumerable<IDeviceModel> GetDevices();
         IDeviceModel GetDevice(Guid deviceId);
     }
 
-    public class ScenarioModel : IScenarioModel
+    public class EditScenarioModel : IEditScenarioModel
     {
         private readonly ISmartDevicesProvider _smartDevicesProvider;
 
-        public ScenarioModel(ISmartDevicesProvider smartDevicesProvider)
+        public EditScenarioModel(ISmartDevicesProvider smartDevicesProvider)
         {
             _smartDevicesProvider = smartDevicesProvider;
         }

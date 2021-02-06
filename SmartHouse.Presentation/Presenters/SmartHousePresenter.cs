@@ -20,7 +20,7 @@ namespace SmartHouse.Presentation.Presenters
 
         private void OpenScripts()
         {
-            Controller.Run<ScenarioPresenter>();
+            Controller.Run<ScenariosPresenter>();
         }
 
         private void AddDevicesToView()

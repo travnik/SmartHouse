@@ -33,23 +33,13 @@
 
         public void Run<TPresenter>() where TPresenter : class, IPresenter
         {
-            if (!_container.IsRegistered<TPresenter>())
-            {
-                _container.Register<TPresenter>();
-            }
-
-            var presenter = _container.Resolve<TPresenter>();
+            var presenter = Create<TPresenter>();
             presenter.Run();
         }
 
         public void Run<TPresenter, TArgumnent>(TArgumnent argumnent) where TPresenter : class, IPresenter<TArgumnent>
         {
-            if (!_container.IsRegistered<TPresenter>())
-            {
-                _container.Register<TPresenter>();
-            }
-
-            var presenter = _container.Resolve<TPresenter>();
+            var presenter = Create<TPresenter>();
             presenter.Run(argumnent);
         }
 

@@ -29,116 +29,81 @@ namespace SmartHouse.WindowsForms.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBoxScript = new System.Windows.Forms.ListBox();
-            this.comboBoxDevices = new System.Windows.Forms.ComboBox();
-            this.buttonAddCommand = new System.Windows.Forms.Button();
-            this.buttonDeleteCommand = new System.Windows.Forms.Button();
-            this.buttonSaveScript = new System.Windows.Forms.Button();
-            this.buttonRunScript = new System.Windows.Forms.Button();
-            this.listBoxCommands = new System.Windows.Forms.ListBox();
-            this.textBoxLog = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listBoxScripts = new System.Windows.Forms.ListBox();
+            this.buttonCreateScript = new System.Windows.Forms.Button();
+            this.buttonRemoveScript = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listBoxScript
+            // groupBox2
             // 
-            this.listBoxScript.FormattingEnabled = true;
-            this.listBoxScript.ItemHeight = 15;
-            this.listBoxScript.Location = new System.Drawing.Point(703, 12);
-            this.listBoxScript.Name = "listBoxScript";
-            this.listBoxScript.Size = new System.Drawing.Size(247, 394);
-            this.listBoxScript.TabIndex = 0;
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.buttonRemoveScript);
+            this.groupBox2.Controls.Add(this.buttonCreateScript);
+            this.groupBox2.Controls.Add(this.listBoxScripts);
+            this.groupBox2.Location = new System.Drawing.Point(22, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(563, 328);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Менеджер скриптов";
             // 
-            // comboBoxDevices
+            // listBoxScripts
             // 
-            this.comboBoxDevices.FormattingEnabled = true;
-            this.comboBoxDevices.Location = new System.Drawing.Point(12, 12);
-            this.comboBoxDevices.Name = "comboBoxDevices";
-            this.comboBoxDevices.Size = new System.Drawing.Size(239, 23);
-            this.comboBoxDevices.TabIndex = 1;
+            this.listBoxScripts.FormattingEnabled = true;
+            this.listBoxScripts.ItemHeight = 15;
+            this.listBoxScripts.Location = new System.Drawing.Point(17, 23);
+            this.listBoxScripts.Name = "listBoxScripts";
+            this.listBoxScripts.Size = new System.Drawing.Size(284, 289);
+            this.listBoxScripts.TabIndex = 6;
             // 
-            // buttonAddCommand
+            // buttonCreateScript
             // 
-            this.buttonAddCommand.Location = new System.Drawing.Point(603, 98);
-            this.buttonAddCommand.Name = "buttonAddCommand";
-            this.buttonAddCommand.Size = new System.Drawing.Size(75, 55);
-            this.buttonAddCommand.TabIndex = 3;
-            this.buttonAddCommand.Text = "Добавить команду";
-            this.buttonAddCommand.UseVisualStyleBackColor = true;
+            this.buttonCreateScript.Location = new System.Drawing.Point(348, 23);
+            this.buttonCreateScript.Name = "buttonCreateScript";
+            this.buttonCreateScript.Size = new System.Drawing.Size(166, 45);
+            this.buttonCreateScript.TabIndex = 7;
+            this.buttonCreateScript.Text = "Создать скрипт";
+            this.buttonCreateScript.UseVisualStyleBackColor = true;
             // 
-            // buttonDeleteCommand
+            // buttonRemoveScript
             // 
-            this.buttonDeleteCommand.Location = new System.Drawing.Point(603, 200);
-            this.buttonDeleteCommand.Name = "buttonDeleteCommand";
-            this.buttonDeleteCommand.Size = new System.Drawing.Size(77, 67);
-            this.buttonDeleteCommand.TabIndex = 4;
-            this.buttonDeleteCommand.Text = "Удалить команду";
-            this.buttonDeleteCommand.UseVisualStyleBackColor = true;
+            this.buttonRemoveScript.Location = new System.Drawing.Point(348, 168);
+            this.buttonRemoveScript.Name = "buttonRemoveScript";
+            this.buttonRemoveScript.Size = new System.Drawing.Size(166, 54);
+            this.buttonRemoveScript.TabIndex = 8;
+            this.buttonRemoveScript.Text = "Удалить скрипт";
+            this.buttonRemoveScript.UseVisualStyleBackColor = true;
             // 
-            // buttonSaveScript
+            // button1
             // 
-            this.buttonSaveScript.Location = new System.Drawing.Point(22, 152);
-            this.buttonSaveScript.Name = "buttonSaveScript";
-            this.buttonSaveScript.Size = new System.Drawing.Size(204, 50);
-            this.buttonSaveScript.TabIndex = 5;
-            this.buttonSaveScript.Text = "Сохранить скрипт";
-            this.buttonSaveScript.UseVisualStyleBackColor = true;
-            // 
-            // buttonRunScript
-            // 
-            this.buttonRunScript.Location = new System.Drawing.Point(22, 217);
-            this.buttonRunScript.Name = "buttonRunScript";
-            this.buttonRunScript.Size = new System.Drawing.Size(204, 50);
-            this.buttonRunScript.TabIndex = 6;
-            this.buttonRunScript.Text = "Выполнить скрипт";
-            this.buttonRunScript.UseVisualStyleBackColor = true;
-            // 
-            // listBoxCommands
-            // 
-            this.listBoxCommands.FormattingEnabled = true;
-            this.listBoxCommands.ItemHeight = 15;
-            this.listBoxCommands.Location = new System.Drawing.Point(321, 12);
-            this.listBoxCommands.Name = "listBoxCommands";
-            this.listBoxCommands.Size = new System.Drawing.Size(258, 394);
-            this.listBoxCommands.TabIndex = 7;
-            // 
-            // textBoxLog
-            // 
-            this.textBoxLog.Location = new System.Drawing.Point(22, 296);
-            this.textBoxLog.Multiline = true;
-            this.textBoxLog.Name = "textBoxLog";
-            this.textBoxLog.ReadOnly = true;
-            this.textBoxLog.Size = new System.Drawing.Size(293, 142);
-            this.textBoxLog.TabIndex = 8;
+            this.button1.Location = new System.Drawing.Point(348, 95);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(166, 46);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Редактировать скрипт";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // ScenarioForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 450);
-            this.Controls.Add(this.textBoxLog);
-            this.Controls.Add(this.listBoxCommands);
-            this.Controls.Add(this.buttonRunScript);
-            this.Controls.Add(this.buttonSaveScript);
-            this.Controls.Add(this.buttonDeleteCommand);
-            this.Controls.Add(this.buttonAddCommand);
-            this.Controls.Add(this.comboBoxDevices);
-            this.Controls.Add(this.listBoxScript);
-            this.Name = "ScenarioForm";
+            this.ClientSize = new System.Drawing.Size(614, 359);
+            this.Controls.Add(this.groupBox2);
+            this.Name = "EditScriptForm";
             this.Text = "ScenarioForm";
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBoxScript;
-        private System.Windows.Forms.ComboBox comboBoxDevices;
-        private System.Windows.Forms.Button buttonAddCommand;
-        private System.Windows.Forms.Button buttonDeleteCommand;
-        private System.Windows.Forms.Button buttonSaveScript;
-        private System.Windows.Forms.Button buttonRunScript;
-        private System.Windows.Forms.ListBox listBoxCommands;
-        private System.Windows.Forms.TextBox textBoxLog;
+        private System.Windows.Forms.Button buttonRemoveScript;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonCreateScript;
+        private System.Windows.Forms.ListBox listBoxScripts;
     }
 }
