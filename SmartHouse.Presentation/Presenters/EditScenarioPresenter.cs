@@ -26,9 +26,19 @@ namespace SmartHouse.Presentation.Presenters
             View.AddCommand += AddCommand;
             View.RemoveCommand += RemoveCommand;
             View.SaveScript += SaveScript;
+            View.ExecuteScript += ExecuteScript;
 
             View.SourceScriptCommands = _descriptCommands;
             AddDevicesToView();
+        }
+
+        private void ExecuteScript()
+        {
+            foreach (var command in _descriptCommands.ToList())
+            {
+                var status = _editScenarioModel.Execute(command);
+                View.AddLog(status);
+            }
         }
 
         private void SaveScript()

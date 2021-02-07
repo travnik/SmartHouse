@@ -11,6 +11,7 @@ namespace SmartHouse.DomainModel
         IEnumerable<IDeviceModel> GetDevices();
         IDeviceModel GetDevice(Guid deviceId);
         ScriptModel Save(ScriptModel scriptModel, IEnumerable<DescriptCommand> commands);
+        string Execute(DescriptCommand command);
     }
 
     public class EditScenarioModel : IEditScenarioModel
@@ -40,6 +41,12 @@ namespace SmartHouse.DomainModel
             scriptModel.DescriptCommands.Clear();
             scriptModel.DescriptCommands.AddRange(commands);
             return _scriptRepository.AddOrUpdate(scriptModel);
+        }
+
+        public string Execute(DescriptCommand command)
+        {
+            var device = _smartDevicesProvider.GetDevice(command.DeviceId);
+            return device.ExecuteCommand(command.CommandId);
         }
     }
 }
