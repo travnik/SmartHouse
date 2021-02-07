@@ -1,62 +1,74 @@
-﻿using System.ComponentModel;
+﻿using System;
 using System.Linq;
-using SmartHouse.DomainModel;
-using SmartHouse.DomainModel.SmartDevices.Common;
+using SmartHouse.DomainModel.Scripts;
 using SmartHouse.Presentation.Common;
 using SmartHouse.Presentation.Views;
 using SmartHouse.Presentation.Views.ViewModels;
 
 namespace SmartHouse.Presentation.Presenters
 {
-    public class ScenariosPresenter : BasePresener<IEditScenarioView>
+    public class ScenariosPresenter : BasePresener<IScenariosView>, IDisposable
     {
-        private readonly IEditScenarioModel _scenarioModel;
-        private readonly BindingList<DescriptCommand> _descriptCommands = new BindingList<DescriptCommand>();
+        private const string NewScriptDefaultName = "Новый скрипт";
+        private readonly IScriptRepository _scriptRepository;
 
         public ScenariosPresenter(IApplicationController controller, 
-            IEditScenarioView view,
-            IEditScenarioModel scenarioModel) 
+            IScenariosView view, 
+            IScriptRepository scriptRepository) 
             : base(controller, view)
         {
-            _scenarioModel = scenarioModel;
-            view.DeviceSelected += ViewOnDeviceSelected;
-            view.AddCommand += AddCommand;
-            View.BindScript(_descriptCommands);
-            AddDevicesToView();
+            _scriptRepository = scriptRepository;
+            View.NewScript += NewScript;
+            View.EditScript += EditScript;
+            View.RemoveScript += RemoveScript;
+
+            SetSourceScripts();
         }
 
-        private void AddCommand(DescriptCommand command)
+        private void RemoveScript(ScriptViewModel scriptViewModel)
         {
-            _descriptCommands.Add(command);
+            _scriptRepository.Remove(scriptViewModel.Id);
+            SetSourceScripts();
         }
 
-        private void ViewOnDeviceSelected(DeviceViewModel deviceModel)
+        private void EditScript(ScriptViewModel scriptViewModel)
         {
-            var device = _scenarioModel.GetDevice(deviceModel.Id);
-            var commands = device
-                .GetCommandsList()
-                .Select(o => new DescriptCommand()
-                {
-                    DeviceId = device.Id,
-                    DeviceName = device.Name,
-                    CommandId = o.Id,
-                    CommandName = o.Name
-                })
-                .ToList();
-
-            View.BindCommandsList(commands);
+            var script = _scriptRepository.Get(scriptViewModel.Id);
+            RunEditScript(script);
         }
 
-        private void AddDevicesToView()
+        private void NewScript()
         {
-            var devices = _scenarioModel.GetDevices()
-                .Select(o => new DeviceViewModel()
+            var script = new ScriptModel()
+            {
+                Name = NewScriptDefaultName
+            };
+            RunEditScript(script);
+        }
+
+        private void RunEditScript(ScriptModel script)
+        {
+            Controller.Run<EditScenarioPresenter, ScriptModel>(script);
+            SetSourceScripts();
+        }
+
+        private void SetSourceScripts()
+        {
+            View.SourceScripts = _scriptRepository
+                .Get()
+                .Select(o => new ScriptViewModel()
                 {
                     Id = o.Id,
                     Name = o.Name
                 })
                 .ToList();
-            View.BindDevicesList(devices);
+        }
+
+        public void Dispose()
+        {
+            View.NewScript -= NewScript;
+            View.EditScript -= EditScript;
+            View.RemoveScript -= RemoveScript;
         }
     }
 }

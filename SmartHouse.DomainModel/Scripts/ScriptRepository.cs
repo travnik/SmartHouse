@@ -9,7 +9,8 @@ namespace SmartHouse.DomainModel.Scripts
     {
         IEnumerable<ScriptModel> Get();
         ScriptModel Get(Guid id);
-        ScriptModel Add(ScriptModel script);
+        ScriptModel AddOrUpdate(ScriptModel script);
+        void Remove(Guid id);
     }
 
     public class ScriptRepository : IScriptRepository
@@ -26,10 +27,15 @@ namespace SmartHouse.DomainModel.Scripts
             return _scripts[id];
         }
 
-        public ScriptModel Add(ScriptModel script)
+        public ScriptModel AddOrUpdate(ScriptModel script)
         {
-            _scripts.TryAdd(script.Id, script);
+            _scripts.AddOrUpdate(script.Id, script, (guid, model) => model);
             return script;
+        }
+
+        public void Remove(Guid id)
+        {
+            _scripts.TryRemove(id, out _);
         }
     }
 }

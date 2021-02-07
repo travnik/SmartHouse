@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 using SmartHouse.DomainModel;
+using SmartHouse.DomainModel.Scripts;
 using SmartHouse.DomainModel.SmartDevices.Common;
 using SmartHouse.Presentation.Common;
 using SmartHouse.Presentation.Views;
@@ -9,23 +10,31 @@ using SmartHouse.Presentation.Views.ViewModels;
 
 namespace SmartHouse.Presentation.Presenters
 {
-    public class EditScenarioPresenter : BasePresener<IEditScenarioView>, IDisposable
+    public class EditScenarioPresenter : BasePresener<IEditScenarioView, ScriptModel>, IDisposable
     {
-        private readonly IEditScenarioModel _scenarioModel;
+        private readonly IEditScenarioModel _editScenarioModel;
         private readonly BindingList<DescriptCommand> _descriptCommands = new BindingList<DescriptCommand>();
+        private ScriptModel _script                                                                                                                                                                                                  ;
 
         public EditScenarioPresenter(IApplicationController controller, 
             IEditScenarioView view,
             IEditScenarioModel scenarioModel) 
             : base(controller, view)
         {
-            _scenarioModel = scenarioModel;
+            _editScenarioModel = scenarioModel;
             View.DeviceSelected += ViewOnDeviceSelected;
             View.AddCommand += AddCommand;
             View.RemoveCommand += RemoveCommand;
+            View.SaveScript += SaveScript;
 
-            View.BindScript(_descriptCommands);
+            View.SourceScriptCommands = _descriptCommands;
             AddDevicesToView();
+        }
+
+        private void SaveScript()
+        {
+            _script.Name = View.ScriptName;
+            _editScenarioModel.Save(_script, _descriptCommands.ToList());
         }
 
         private void RemoveCommand(DescriptCommand command)
@@ -40,7 +49,7 @@ namespace SmartHouse.Presentation.Presenters
 
         private void ViewOnDeviceSelected(DeviceViewModel deviceModel)
         {
-            var device = _scenarioModel.GetDevice(deviceModel.Id);
+            var device = _editScenarioModel.GetDevice(deviceModel.Id);
             var commands = device
                 .GetCommandsList()
                 .Select(o => new DescriptCommand()
@@ -52,19 +61,19 @@ namespace SmartHouse.Presentation.Presenters
                 })
                 .ToList();
 
-            View.BindCommandsList(commands);
+            View.SourceCommandsList = commands;
         }
 
         private void AddDevicesToView()
         {
-            var devices = _scenarioModel.GetDevices()
+            var devices = _editScenarioModel.GetDevices()
                 .Select(o => new DeviceViewModel()
                 {
                     Id = o.Id,
                     Name = o.Name
                 })
                 .ToList();
-            View.BindDevicesList(devices);
+            View.SourceDevicesList = devices;
         }
 
         public void Dispose()
@@ -72,6 +81,18 @@ namespace SmartHouse.Presentation.Presenters
             View.DeviceSelected -= ViewOnDeviceSelected;
             View.AddCommand -= AddCommand;
             View.RemoveCommand -= RemoveCommand;
+            View.SaveScript -= SaveScript;
+        }
+
+        public override void Run(ScriptModel argument)
+        {
+            _script = argument;
+            View.ScriptName = argument.Name;
+            foreach (var command in _script.DescriptCommands)
+            {
+                _descriptCommands.Add(command);
+            }
+            View.Show();
         }
     }
 }

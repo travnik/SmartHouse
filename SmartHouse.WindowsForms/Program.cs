@@ -35,7 +35,6 @@ namespace SmartHouse.WindowsForms
                 .RegisterView<ISmartHouseView, Forms.SmartHouseForm>()
                 .RegisterService<ISmartHouseModel, SmartHouseModel>()
                 .RegisterView<IScenariosView, Forms.ScenarioForm>()
-                .RegisterService<IScenariosModel, ScenariosModel>()
                 .RegisterView<IEditScenarioView, Forms.EditScenarioForm>()
                 .RegisterService<IEditScenarioModel, EditScenarioModel>()
                 .RegisterInstance(new ApplicationContext());

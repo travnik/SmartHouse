@@ -9,15 +9,24 @@ namespace SmartHouse.Presentation.Views
 {
     public interface IEditScenarioView : IView
     {
-        void BindDevicesList(IEnumerable<DeviceViewModel> devices);
-        void BindCommandsList(IEnumerable<DescriptCommand> commands);
-        void BindScript(BindingList<DescriptCommand> scriptCommands);
+        IEnumerable<DeviceViewModel> SourceDevicesList { set; }
+
+        IEnumerable<DescriptCommand> SourceCommandsList { set; }
+
+        BindingList<DescriptCommand> SourceScriptCommands { set; }
+
         event Action<DeviceViewModel> DeviceSelected;
+
         event Action<DescriptCommand> AddCommand;
+
         event Action<DescriptCommand> RemoveCommand;
+
         event Action ExecuteScript;
+
         event Action SaveScript;
+
         void AddLog(string text);
+
         string ScriptName { get; set; }
     }
 }

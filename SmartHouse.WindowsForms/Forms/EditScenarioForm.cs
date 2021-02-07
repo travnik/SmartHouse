@@ -15,6 +15,9 @@ namespace SmartHouse.WindowsForms.Forms
             get => textBoxScriptName.Text;
             set => textBoxScriptName.Text = value;
         }
+        public IEnumerable<DeviceViewModel> SourceDevicesList { set => comboBoxDevices.DataSource = value; }
+        public IEnumerable<DescriptCommand> SourceCommandsList { set => listBoxCommands.DataSource = value; }
+        public BindingList<DescriptCommand> SourceScriptCommands { set => listBoxScript.DataSource = value; }
 
         public event Action<DeviceViewModel> DeviceSelected;
         public event Action<DescriptCommand> AddCommand;
@@ -25,11 +28,15 @@ namespace SmartHouse.WindowsForms.Forms
         public EditScenarioForm()
         {
             InitializeComponent();
+
             comboBoxDevices.SelectedValueChanged += ComboBoxDevicesOnSelectedValueChanged;
             buttonAddCommand.Click += ButtonAddCommandOnClick;
             buttonDeleteCommand.Click += ButtonDeleteCommandOnClick;
             buttonRunScript.Click += (sender, args) => ExecuteScript?.Invoke();
             buttonSaveScript.Click += (sender, args) => SaveScript?.Invoke();
+
+            listBoxCommands.DisplayMember = nameof(DescriptCommand.CommandName);
+            comboBoxDevices.DisplayMember = nameof(DeviceViewModel.Name);
         }
 
         private void ButtonDeleteCommandOnClick(object sender, EventArgs e)
@@ -56,25 +63,6 @@ namespace SmartHouse.WindowsForms.Forms
             var value = comboBox.SelectedItem as DeviceViewModel;
             var handler = DeviceSelected;
             handler?.Invoke(value);
-        }
-
-        public void BindCommandsList(IEnumerable<DescriptCommand> commands)
-        {
-            listBoxCommands.DataSource = commands;
-            listBoxCommands.DisplayMember = nameof(DescriptCommand.CommandName);
-            listBoxCommands.ValueMember = nameof(DescriptCommand.CommandId);
-        }
-
-        public void BindDevicesList(IEnumerable<DeviceViewModel> devices)
-        {
-            comboBoxDevices.DataSource = devices;
-            comboBoxDevices.DisplayMember = nameof(DeviceViewModel.Name);
-            comboBoxDevices.ValueMember = nameof(DeviceViewModel.Id);
-        }
-
-        public void BindScript(BindingList<DescriptCommand> scriptCommands)
-        {
-            listBoxScript.DataSource = scriptCommands;
         }
 
         public new void Show()
